@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="conta container-fluid justify-content-center bg-light d-flex ">
+
+    <div class="crd card rounded-2 bg-light mb-5" style="border:0;">
+        <div class="row">
+            <h1 class="hed2">{{data.name}}</h1>
+            <div class="cd card shadow-lg bg-body rounded mb-4">
+                <img src="{{data.image.url}}" class="card-img-top rounded-2 mt-4 ms-4" alt="...">
+                <div class="card-body">
+
+                </div>
+            </div>
+            <div class="col2 col-7">
+                <h2>{{data.name}}</h2>
+                <h5>{{data.desc}}</h5>
+                <h3 class="pr" style="color: rgb(14, 155, 38);">INR {{data.price}}</h3>
+                <h5 class="ca mt-3">category: {{data.category}}</h5>
+                <h5>created date: {{data.created}}</h5>
+                <h5 class="up mb-4">updated date: {{data.updated}}</h5>
+
+                {% if data.stock >= 1 %}
+                <a href="{% url 'cart:addcart' data.id %}"class="btn btn-warning me-3 p-3"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="24"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>Add to cart </a> 
+                <button class="btn btn-primary p-3">Buy Now</button>
+                {% else %}
+                <span>
+                    <h3 class="out" style="color: red;">out of stock</h3>
+                </span>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

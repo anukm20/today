@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if category %}
+<div class="container-fluid mb-3">
+  <h1 class="hed mt-3">{{category.name}}</h1>
+  <img class="can rounded-5 " src="{% static './images/Screenshot from 2024-02-02 11-27-20.png' %}" style="margin-left: 280px;" width="68%" height="400" alt="">
+</div>
+{% else %}
+<div class="container-fluid mb-3">
+  <h1 class="hed mt-3 mb-2">All Products</h1>
+  <img class="can rounded-5 " src="../static/images/canva.png" style="margin-left: 30px;" width="96%" height="600"
+    alt="">
+  <h5 class="des mt-4 mb-5">A mobile phone (or cellphone[a]) is a portable telephone that can make and receive calls
+    over a radio frequency link while the user is moving within a telephone service area, as opposed to a fixed-location
+    phone (landline phone). The radio frequency link establishes a connection to the switching systems of a mobile phone
+    operator, which provides access to the public switched telephone network (PSTN). Modern mobile telephone services
+    use a cellular network architecture and therefore mobile telephones are called cellphones (or "cell phones") in
+    North America.</h5>
+</div>
+{% endif %}
+
+<div class="container-fluid">
+  <div class="card-group mb-3 d-flex justify-content-center">
+    {% for i in products %}
+    {% if i.available %}
+    <a href="{% url 'phone:details' i.id %}">
+      <div class="cad shadow me-4 p-3 mb-5">
+        <img src="{{i.image.url}}" height="280px" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h3 class="card-title mt-2">{{i.name}}</h3>
+          <h5 class="card-text" style="color: rgb(44, 159, 44);">${{i.price}}</h5>
+        </div>
+      </div>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="paginator mx-auto mb-2">
+    {% if products.paginator.num_pages > 1 %}<hr>
+      <div class="text-center">
+        {% for pg in products.paginator.page_range %}
+        <a href="?page={{pg}}" class="btn btn-secondary btn-sm {% if products.number == pg %}active {% endif %}">{{pg}}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{% endblock %}

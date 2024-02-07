@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid mb-3">
+  <h1 class="hed mt-3">{{category.name}}</h1>
+  <img class="can rounded-5 " src="{% static './images/Screenshot from 2024-02-02 11-27-20.png' %}" style="margin-left: 280px;" width="68%" height="400" alt="">
+</div>
+<div class="prcnt container-fluid d-flex justify-content-center">
+  <div class="card-group mb-3">
+    {% for product in products %}
+    <a href="{% url 'phone:details' product.id %}">
+      <div class="cad shadow me-4 p-3 mb-5 mt-3">
+        <img src="{{product.image.url}}" height="250px" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h3 class="card-title mt-2">{{product.name}}</h3>
+          <h5 class="card-text" style="color: rgb(44, 159, 44);">${{product.price}}</h5>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <h3 class="NT">product Not found!</h3>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+{% endblock %}
