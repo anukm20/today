@@ -1,0 +1,52 @@
+{% load static %}
+<nav class="navbar bg-dark navbar-dark">
+  <div class="container-fluid p-0">
+    <span class="navbar-brand mb-0 mx-auto h1"></span>
+      <form class="d-flex" role="search" action="{% url 'searchapp:search' %}" method="GET">
+      <input class="bttn form-control" type="search" name="q" placeholder="Search" aria-label="Search">
+      <button class="btn ser" type="submit"><img src="{% static './images/search_white_24dp.svg' %}" alt=""></button>
+      </form>
+      {% if user.is_authenticated %}           
+      <span class="us me-3 mt-2" style="color: white;">{{user}}</span>
+      <a href="{% url 'auth:logout' %}" class="btn btn-danger ps-3 pe-3 lgo " type="submit">logout</a>
+      {% else %}
+      <a href="{% url 'auth:register' %}" class=" btn btn-light ps-3 pe-3 me-3" type="submit">sign in</a>
+      <a href="{% url 'auth:loginuser' %}" class="btn btn-light ps-3 pe-3 me-3" type="submit">login</a>
+      {% endif %}
+  </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg nvbk">  
+  <div class="container-fluid nv">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="ct navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active mt-1" aria-current="page" href="{% url 'phone:home' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mt-1" style="margin-right: 885px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'phone:home' %}">All products</a></li>
+            {% for link in links %}
+            <li><a class="dropdown-item" href="{{link.get_url}}">{{link.name}}</a></li>
+            {% endfor %} 
+          </ul>
+   
+        </li>
+        {% if cart_items_count > 0 %}
+        <a href="{% url 'cart:displaycart' %}" class="catt btn btn-warning ps-4 pe-4 pt-2 pb-2"><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>cart<span class="badge badge-light">{{cart_items_count}}</span></a>
+        {% else %}
+        <a href="{% url 'cart:displaycart' %}"></a>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+

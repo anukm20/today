@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8">
+    <h1 class="yr mt-3 mb-5">YOUR PURCHASE CHART</h1>
+    <table class="tbl table w-100">
+      <thead class="thead-light">
+        <tr class="trr bg-secondary">
+          <th scope="col" style="width: 350px;">
+            <h3>product</h3>
+          </th>
+          <th scope="col">
+            <h3>quantity</h3>
+          </th>
+          <th scope="col">
+            <h3>price</h3>
+          </th>
+          <th scope="col">
+            <h3>Cancel</h3>
+          </th>
+          <th scope="col">
+            <h3>buy Now</h3>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% for cartitem in cart %}
+
+          <th scope="row">
+            <img class="crtimg me-3 shadow" src="{{cartitem.product.image.url}}" alt="">{{cartitem.product}}
+          </th>
+          <td>
+            <h4 class="qt mt-4 ms-4 me-5 shadow"><button class="btn">-</button>{{cartitem.quantity}}<a href=""class="btn">+</button></h4>
+          </td>
+          <td>
+            <h4 class="mt-4 shadow">{{cartitem.product.price}}</h4>
+          </td>
+          <td><a href="" class="btn btn-danger mt-4 shadow">Cancel</a></td>
+          <td><button class="btn btn-success mt-4 shadow">Buy Now</button></td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+  <div class="prd col-lg-3">
+    <table class="tble table">
+    <thead class="thead-light">
+      <tr class="trr bg-secondary">
+        <th scope="col">
+          <h3>price details</h3>
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <th class="rr" scope="row">
+          <h4 class="mt-4 ms-4">TOTAL:$ </h4>
+        </th>
+      </tr>
+    </tbody>
+    </table>
+
+
+
+  </div>
+</div>
+<a href="{% url 'phone:home' %}" class="purch btn btn-primary pt-2 pb-2 ps-2 pe-2">
+  <h4>continue purchase</h4>
+</a>
+
+
+{% endblock %}
